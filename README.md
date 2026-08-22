@@ -206,7 +206,11 @@ Detailed implementation documentation is available in the `docs` directory.
 
 ## Cleanup
 
-When the infrastructure is no longer required:
+## Infrastructure Cleanup
+
+After deployment, testing, monitoring, troubleshooting, and documentation were completed, the Terraform-managed AWS infrastructure was destroyed to prevent unnecessary cloud charges.
+
+A versioned S3 bucket initially prevented deletion because historical object versions remained after the current objects were removed. After deleting the remaining object versions and delete markers, Terraform successfully completed the cleanup.
 
 `terraform destroy`
 
