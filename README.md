@@ -43,6 +43,37 @@ The environment includes:
 - Amazon S3
 - Amazon CloudWatch
 - Amazon SNS
+### Infrastructure Architecture
+
+```mermaid
+flowchart TD
+    User[Internet User] --> IGW[Internet Gateway]
+    IGW --> VPC[CloudNova VPC - 10.0.0.0/16]
+
+    VPC --> PUB[Public Subnet - 10.0.1.0/24]
+    VPC --> PRI[Private Subnet - 10.0.2.0/24]
+
+    PUB --> SG[Web Security Group]
+    SG --> EC2[Ubuntu EC2 Web Server]
+    EC2 --> NGINX[Nginx Web Application]
+
+    SSM[AWS Systems Manager] --> EC2
+
+    EC2 --> ROLE[IAM Role / Instance Profile]
+    ROLE --> S3[Private S3 Bucket]
+
+    EC2 --> CW[Amazon CloudWatch]
+    CW --> ALARM[CPU Alarm]
+    ALARM --> SNS[Amazon SNS]
+    SNS --> EMAIL[Email Notification]
+
+    TF[Terraform] --> VPC
+    TF --> EC2
+    TF --> ROLE
+    TF --> S3
+    TF --> CW
+    TF --> SNS
+```
 
 ---
 
@@ -187,6 +218,50 @@ The environment was validated through:
 - CloudWatch alarm verification
 
 ---
+
+## Project Evidence
+
+### AWS Networking
+
+![CloudNova VPC](screenshots/3-VPC.png)
+
+Custom AWS VPC used for the CloudNova infrastructure.
+
+### EC2 Deployment
+
+![EC2 Running](screenshots/4-EC2%20Running.png)
+
+Ubuntu EC2 instance successfully provisioned through Terraform.
+
+### Nginx Web Server
+
+![CloudNova Web Server](screenshots/5-cloudnova-web-server.png)
+
+CloudNova web page served by Nginx running on the Terraform-provisioned EC2 instance.
+
+### Systems Manager Access
+
+![SSM Session](screenshots/6-ssm%20session%20%26%20online.png)
+
+AWS Systems Manager Session Manager used to access the EC2 instance without relying on an SSH key pair.
+
+### EC2 to S3 Integration
+
+![EC2 to S3](screenshots/7-ec2-to-s3-upload.png)
+
+File uploaded directly from EC2 to S3 using permissions provided through the EC2 IAM role.
+
+### CloudWatch Monitoring
+
+![CloudWatch Alarm](screenshots/11-Verified%20CloudWatch%20alarm.png)
+
+CloudWatch CPU alarm successfully configured and verified.
+
+### Terraform Verification
+
+![Terraform No Changes](screenshots/12-terraform-no-changes.png)
+
+Final Terraform plan confirmed that the deployed infrastructure matched the Terraform configuration.
 
 ## Troubleshooting
 
