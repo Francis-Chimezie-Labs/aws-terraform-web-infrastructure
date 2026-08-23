@@ -231,7 +231,6 @@ AWS | Terraform | Git | GitHub | Ubuntu Linux | Nginx | AWS CLI
 
 ---
 
-## Security and Privacy Notice
 
 ## Security and Privacy Notice
 
