@@ -204,7 +204,6 @@ Detailed implementation documentation is available in the `docs` directory.
 
 ---
 
-## Cleanup
 
 ## Infrastructure Cleanup
 
@@ -222,6 +221,17 @@ This allows Terraform to remove the resources it manages and helps prevent unnec
 
 AWS | Terraform | Git | GitHub | Ubuntu Linux | Nginx | AWS CLI
 
+
+---
+
+## Connect
+
+- [LinkedIn](https://www.linkedin.com/in/francis-osondu)
+- [GitHub Profile](https://github.com/Francis-Chimezie-Labs)
+
+---
+
+## Security and Privacy Notice
 
 ## Security and Privacy Notice
 
